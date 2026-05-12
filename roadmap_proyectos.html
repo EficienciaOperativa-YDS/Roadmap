@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap Q2 2026 — Eficiencia Operativa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Mono:wght@300;400;500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#F5F2EC;--surface:#FFFFFF;--surface2:#F0EDE6;--border:#E2DDD4;--border2:#CCC7BC;
+  --text:#1C1A16;--text2:#6B6457;--text3:#A09890;--ink:#1C1A16;
+  --green:#2A6B4A;--green-bg:#EBF5EF;--green-dot:#4CAF7D;
+  --amber:#7A5200;--amber-bg:#FFF8E7;--amber-dot:#F0A500;
+  --blue:#1A4A7A;--blue-bg:#EAF2FB;--blue-dot:#3A80C8;
+  --red:#8B2020;--red-bg:#FDECEA;--red-dot:#D94F4F;
+  --purple:#4A2A7A;--purple-bg:#F0EAFB;--purple-dot:#8B5CF6;
+  --stone:#5C5650;--stone-bg:#EFECE7;
+  --display:'Playfair Display',serif;--body:'Nunito Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,#C8C3B8 1px,transparent 1px);background-size:28px 28px;opacity:0.2;pointer-events:none;z-index:0;}
+.app{position:relative;z-index:1;max-width:1020px;margin:0 auto;padding:3rem 2rem 6rem;}
+.header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;margin-bottom:3rem;padding-bottom:2rem;border-bottom:2px solid var(--ink);}
+.header-eyebrow{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--text3);margin-bottom:8px;}
+.header h1{font-family:var(--display);font-size:38px;font-weight:900;line-height:1.05;letter-spacing:-.5px;color:var(--ink);}
+.header h1 em{font-style:italic;color:var(--text2);}
+.header-meta{font-size:12px;color:var(--text3);font-family:var(--mono);margin-top:8px;}
+.header-actions{display:flex;gap:8px;align-items:center;}
+.btn{font-family:var(--body);font-size:12px;font-weight:700;padding:8px 18px;border-radius:4px;cursor:pointer;border:1.5px solid var(--border2);transition:all .18s;letter-spacing:.04em;text-transform:uppercase;}
+.btn-primary{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+.btn-primary:hover{background:#3A3730;}
+.btn-ghost{background:transparent;color:var(--text2);}
+.btn-ghost:hover{background:var(--surface2);color:var(--ink);}
+.btn-xs{font-size:10px;padding:3px 9px;border-radius:3px;}
+.summary{display:grid;grid-template-columns:repeat(5,1fr);border:1.5px solid var(--border2);border-radius:8px;overflow:hidden;margin-bottom:2.5rem;background:var(--surface);}
+.sum-item{padding:16px 18px;border-right:1px solid var(--border);}
+.sum-item:last-child{border-right:none;}
+.sum-n{font-family:var(--display);font-size:28px;font-weight:700;color:var(--ink);line-height:1;}
+.sum-l{font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-top:4px;}
+.sum-accent{background:var(--ink);}
+.sum-accent .sum-n,.sum-accent .sum-l{color:var(--bg);}
+.blocker-banner{background:var(--amber-bg);border:1px solid #E8C060;border-left:4px solid var(--amber-dot);border-radius:6px;padding:12px 16px;margin-bottom:2rem;display:flex;gap:12px;align-items:flex-start;}
+.blocker-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.blocker-text{font-size:13px;color:var(--amber);line-height:1.6;}
+.blocker-text strong{font-weight:700;}
+.tabs{display:flex;gap:0;margin-bottom:2rem;border-bottom:1.5px solid var(--border2);}
+.tab{font-size:11px;font-weight:700;padding:9px 20px;cursor:pointer;border:none;border-bottom:3px solid transparent;background:none;color:var(--text3);font-family:var(--body);letter-spacing:.06em;text-transform:uppercase;transition:all .15s;margin-bottom:-1.5px;}
+.tab.active{color:var(--ink);border-bottom-color:var(--ink);}
+.tab:hover:not(.active){color:var(--text2);}
+.view{display:none;}.view.active{display:block;}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid transparent;border-radius:8px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s,border-color .2s;animation:fadeUp .3s ease both;}
+.proj-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07);border-color:var(--border2);}
+.proj-card[data-estado="Completado"]{border-left-color:var(--green-dot);}
+.proj-card[data-estado="En curso"]{border-left-color:var(--blue-dot);}
+.proj-card[data-estado="En pausa"]{border-left-color:var(--amber-dot);}
+.proj-card[data-estado="Bloqueado"]{border-left-color:var(--red-dot);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.proj-top{padding:16px 18px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.proj-info{flex:1;min-width:0;}
+.proj-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:7px;line-height:1.3;}
+.proj-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.pill{font-size:10px;font-family:var(--mono);padding:2px 9px;border-radius:20px;border:1px solid;letter-spacing:.04em;white-space:nowrap;}
+.pill-pbi{color:var(--blue);border-color:#B0CFEA;background:var(--blue-bg);}
+.pill-erp{color:var(--green);border-color:#A8D5BC;background:var(--green-bg);}
+.pill-anal{color:var(--amber);border-color:#E8C878;background:var(--amber-bg);}
+.pill-gest{color:var(--stone);border-color:#C8C2B8;background:var(--stone-bg);}
+.pill-auto{color:var(--purple);border-color:#C4AAEC;background:var(--purple-bg);}
+.estado-pill{cursor:pointer;font-weight:600;}
+.e-Completado{color:var(--green);border-color:#A8D5BC;background:var(--green-bg);}
+.e-En_curso{color:var(--blue);border-color:#B0CFEA;background:var(--blue-bg);}
+.e-En_pausa{color:var(--amber);border-color:#E8C878;background:var(--amber-bg);}
+.e-Bloqueado{color:var(--red);border-color:#E8AAAA;background:var(--red-bg);}
+.proj-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;}
+.proj-pct{font-family:var(--display);font-size:34px;font-weight:700;line-height:1;}
+.pct-done{color:var(--green);}
+.pct-high{color:var(--blue);}
+.pct-mid{color:var(--amber);}
+.pct-low{color:var(--text3);}
+.pct-zero{color:var(--red);}
+.prog-wrap{padding:0 18px 4px;}
+.prog-bg{height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+.proj-obj{padding:2px 18px 10px;font-size:12px;color:var(--text2);line-height:1.6;}
+.blocker-row{margin:0 18px 10px;padding:7px 10px;background:var(--red-bg);border-radius:4px;font-size:11px;color:var(--red);font-family:var(--mono);display:flex;gap:6px;align-items:center;}
+.etapas-wrap{padding:0 18px 16px;}
+.etapas-label{font-size:9px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:12px;}
+.roadmap{display:flex;gap:0;position:relative;overflow-x:auto;padding-bottom:4px;}
+.roadmap::before{content:'';position:absolute;top:13px;left:13px;right:13px;height:1px;background:var(--border2);z-index:0;}
+.etapa-node{flex:1;min-width:70px;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;}
+.etapa-dot{width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;border:1.5px solid;margin-bottom:7px;transition:transform .2s;background:var(--surface);}
+.etapa-dot:hover{transform:scale(1.15);}
+.dot-done{background:var(--green-bg);border-color:var(--green-dot);color:var(--green);}
+.dot-mid{background:var(--blue-bg);border-color:var(--blue-dot);color:var(--blue);}
+.dot-idle{background:var(--surface2);border-color:var(--border2);color:var(--text3);}
+.dot-block{background:var(--red-bg);border-color:var(--red-dot);color:var(--red);}
+.etapa-name{font-size:10px;color:var(--text2);text-align:center;line-height:1.3;max-width:72px;}
+.etapa-input{width:46px;font-size:11px;font-family:var(--mono);padding:3px 6px;border:1px solid var(--border2);border-radius:3px;background:var(--surface2);color:var(--ink);text-align:center;margin-top:4px;}
+.etapa-input:focus{outline:none;border-color:var(--blue-dot);}
+.add-form{background:var(--surface);border:1.5px solid var(--border2);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;}
+.form-title{font-family:var(--display);font-size:18px;font-weight:700;margin-bottom:1.25rem;color:var(--ink);}
+.flabel{font-size:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:5px;display:block;}
+.field{width:100%;font-size:13px;padding:9px 12px;border:1px solid var(--border2);border-radius:4px;background:var(--surface2);color:var(--ink);font-family:var(--body);transition:border .15s;}
+.field:focus{outline:none;border-color:var(--blue-dot);background:var(--surface);}
+select.field{cursor:pointer;}
+textarea.field{resize:vertical;min-height:64px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;}
+.fg{margin-bottom:12px;}
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.k-col{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.k-col-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-family:var(--mono);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.k-dot{width:8px;height:8px;border-radius:50%;}
+.k-card{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:11px;margin-bottom:8px;}
+.k-name{font-size:12px;font-weight:700;margin-bottom:5px;line-height:1.4;color:var(--ink);}
+.k-area{font-size:10px;font-family:var(--mono);color:var(--text3);margin-bottom:8px;}
+.k-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.k-fill{height:100%;border-radius:2px;}
+.k-pct{font-size:10px;font-family:var(--mono);color:var(--text3);margin-top:4px;}
+.k-empty{font-size:11px;font-family:var(--mono);color:var(--text3);text-align:center;padding:1rem 0;}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--ink);color:var(--bg);border-radius:5px;padding:10px 18px;font-size:12px;font-family:var(--mono);z-index:100;opacity:0;transform:translateY(6px);transition:all .25s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+.empty{text-align:center;padding:3rem;color:var(--text3);font-family:var(--mono);font-size:13px;}
+@media(max-width:700px){.summary{grid-template-columns:1fr 1fr 1fr;}.kanban{grid-template-columns:1fr 1fr;}.grid2{grid-template-columns:1fr;}.header{grid-template-columns:1fr;}.header h1{font-size:28px;}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <div>
+      <div class="header-eyebrow">Eficiencia Operativa · YODAIS S.A.S.</div>
+      <h1>Roadmap <em>Q2 2026</em></h1>
+      <div class="header-meta" id="header-sub"></div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-ghost" onclick="toggleForm()">+ Proyecto</button>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="sum-item"><div class="sum-n" id="s-total">0</div><div class="sum-l">Proyectos</div></div>
+    <div class="sum-item"><div class="sum-n" id="s-curso">0</div><div class="sum-l">En curso</div></div>
+    <div class="sum-item sum-accent"><div class="sum-n" id="s-comp">0</div><div class="sum-l">Completados</div></div>
+    <div class="sum-item"><div class="sum-n" id="s-bloq">0</div><div class="sum-l">Bloqueados</div></div>
+    <div class="sum-item"><div class="sum-n" id="s-avg">0%</div><div class="sum-l">Avance prom.</div></div>
+  </div>
+
+  <div class="blocker-banner" id="blocker-banner" style="display:none">
+    <div class="blocker-icon">⛓</div>
+    <div class="blocker-text" id="blocker-text"></div>
+  </div>
+
+  <div class="add-form" id="add-form" style="display:none">
+    <div class="form-title">Nuevo proyecto</div>
+    <div class="fg"><label class="flabel">Nombre</label><input class="field" id="f-nombre" placeholder="ej: Módulo de inventarios ALMA"></div>
+    <div class="grid2">
+      <div class="fg"><label class="flabel">Área</label>
+        <select class="field" id="f-area">
+          <option value="erp">ERP ALMA</option><option value="pbi">Power BI / Reportes</option>
+          <option value="anal">Análisis / Diagnóstico</option><option value="auto">Automatización</option><option value="gest">Gestión interna</option>
+        </select>
+      </div>
+      <div class="fg"><label class="flabel">Estado</label>
+        <select class="field" id="f-estado">
+          <option value="En curso">En curso</option><option value="En pausa">En pausa</option>
+          <option value="Bloqueado">Bloqueado</option><option value="Completado">Completado</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg"><label class="flabel">¿Qué resuelve?</label><input class="field" id="f-obj" placeholder="ej: Trazabilidad de insumos por orden de producción"></div>
+    <div class="fg"><label class="flabel">Bloqueado por (si aplica)</label><input class="field" id="f-bloqueo" placeholder="ej: Pendiente acceso de proveedor"></div>
+    <div class="fg"><label class="flabel">Etapas (una por línea)</label><textarea class="field" id="f-etapas" placeholder="Levantamiento&#10;Diseño&#10;Construcción&#10;Validación&#10;Entrega"></textarea></div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="toggleForm()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveProject()">Guardar</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('roadmap')">Roadmap</button>
+    <button class="tab" onclick="showTab('kanban')">Kanban</button>
+  </div>
+
+  <div id="v-roadmap" class="view active"><div id="roadmap-list"></div></div>
+  <div id="v-kanban" class="view"><div class="kanban" id="kanban-board"></div></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const AM={pbi:{label:'Power BI / Reportes',cls:'pill-pbi'},erp:{label:'ERP ALMA',cls:'pill-erp'},anal:{label:'Análisis / Diagnóstico',cls:'pill-anal'},gest:{label:'Gestión interna',cls:'pill-gest'},auto:{label:'Automatización',cls:'pill-auto'}};
+const EC={'Completado':'#4CAF7D','En curso':'#3A80C8','En pausa':'#F0A500','Bloqueado':'#D94F4F'};
+const D=[
+  {id:1,nombre:'Dashboard VENTAS 2026 — Page 3 Vendedores',area:'pbi',estado:'Completado',objetivo:'Muestra avance individual por vendedor restando devoluciones a quien emitió la factura. Finalizado.',bloqueo:'',etapas:[{n:'Levantamiento',p:100},{n:'Medidas DAX',p:100},{n:'Construcción visual',p:100},{n:'Validación Comercial',p:100},{n:'Publicación',p:100}]},
+  {id:2,nombre:'Implementación ERP ALMA — Módulo Producción',area:'erp',estado:'En pausa',objetivo:'Todo implementado. Pendiente asignar insumos a centros de costo para completar parametrización.',bloqueo:'Centros de costo sin implementar',etapas:[{n:'Kick off',p:100},{n:'Parametrización',p:100},{n:'Capacitación equipo',p:100},{n:'Asignación C. costo',p:0},{n:'Estabilización',p:0}]},
+  {id:3,nombre:'Centros de costo ALMA',area:'erp',estado:'En pausa',objetivo:'Prerequisito de producción y nómina. Solo creados los centros — avanzará al terminar entregables contables.',bloqueo:'Pendiente entregables contables',etapas:[{n:'Definición estructura',p:100},{n:'Creación en ALMA',p:100},{n:'Asignación módulos',p:0},{n:'Validación contable',p:0},{n:'Cierre',p:0}]},
+  {id:4,nombre:'Implementación ERP ALMA — Módulo Nómina',area:'erp',estado:'En pausa',objetivo:'Empleados creados. Orden en ALMA: centros de costo → producción → nómina.',bloqueo:'Centros de costo sin implementar',etapas:[{n:'Capacitación',p:100},{n:'Creación empleados',p:100},{n:'Asignación C. costo',p:0},{n:'Configuración nómina',p:0},{n:'Go-live',p:0}]},
+  {id:5,nombre:'Empalme ALMA — Acelerango CRM',area:'erp',estado:'Bloqueado',objetivo:'Conectar CRM Acelerango con ALMA para trazabilidad comercial.',bloqueo:'Acelerango debe entregar requerimientos para la API',etapas:[{n:'Diagnóstico',p:100},{n:'Mapeo campos',p:60},{n:'Requerimientos API',p:0},{n:'Desarrollo conexión',p:0},{n:'Validación',p:0}]},
+  {id:6,nombre:'Implementación API ALMA — Siigo',area:'erp',estado:'Bloqueado',objetivo:'Integrar ALMA con Siigo para sincronización contable automática.',bloqueo:'Pendiente acceso Siigo + centros de costo para parametrización',etapas:[{n:'Acceso Siigo',p:0},{n:'C. costo param.',p:0},{n:'Mapeo contable',p:0},{n:'Desarrollo API',p:0},{n:'Pruebas',p:0}]},
+  {id:7,nombre:'Capacitación ALMA — Compras y Contabilidad',area:'erp',estado:'Completado',objetivo:'Equipo capacitado en módulos de compras, contabilidad e informes en ALMA.',bloqueo:'',etapas:[{n:'Sesión compras',p:100},{n:'Sesión contabilidad',p:100},{n:'Sesión informes',p:100},{n:'Seguimiento adopción',p:100}]},
+  {id:8,nombre:'Segmentación y análisis de clientes',area:'anal',estado:'Completado',objetivo:'Segmentos VD1, VD2, Shangai y 3 Vías enriquecidos con datos de comportamiento. Entregado a Comercial.',bloqueo:'',etapas:[{n:'Extracción datos',p:100},{n:'Enriquecimiento CRM',p:100},{n:'Clasificación',p:100},{n:'Entrega Comercial',p:100}]},
+  {id:9,nombre:'Costos de productos vendidos',area:'anal',estado:'Completado',objetivo:'Cálculo y reporte de costo de productos vendidos para análisis de rentabilidad. Entregado a gerencia.',bloqueo:'',etapas:[{n:'Levantamiento datos',p:100},{n:'Cálculo costos',p:100},{n:'Validación',p:100},{n:'Entrega gerencia',p:100}]},
+  {id:10,nombre:'Cartera clientes',area:'anal',estado:'En curso',objetivo:'Análisis y gestión de cartera — estado de cuentas y vencimientos.',bloqueo:'',etapas:[{n:'Levantamiento',p:100},{n:'Análisis vencimientos',p:100},{n:'Gestión cobro',p:50},{n:'Entrega',p:0}]},
+  {id:11,nombre:'Indicadores de gestión y entregables LIA',area:'gest',estado:'En curso',objetivo:'Diseñar sistema propio de indicadores que refleje trabajo especializado para reportes a gerencia.',bloqueo:'',etapas:[{n:'Diagnóstico actual',p:100},{n:'Propuesta indicadores',p:20},{n:'Validación gerencia',p:0},{n:'Implementación',p:0}]},
+];
+
+function load(){try{const s=localStorage.getItem('rm_q2_v4');return s?JSON.parse(s):JSON.parse(JSON.stringify(D));}catch{return JSON.parse(JSON.stringify(D));}}
+function save(ps){localStorage.setItem('rm_q2_v4',JSON.stringify(ps));}
+let P=load();
+function avg(p){if(!p.etapas.length)return 0;return Math.round(p.etapas.reduce((s,e)=>s+e.p,0)/p.etapas.length);}
+function pc(v){if(v===100)return 'pct-done';if(v>=60)return 'pct-high';if(v>=30)return 'pct-mid';if(v>0)return 'pct-low';return 'pct-zero';}
+function bc(estado,v){if(estado==='Completado')return '#4CAF7D';if(estado==='Bloqueado')return '#D94F4F';if(v>=60)return '#3A80C8';if(v>=30)return '#F0A500';return '#A09890';}
+function dc(p,estado){if(estado==='Bloqueado'&&p===0)return 'dot-block';if(p===100)return 'dot-done';if(p>0)return 'dot-mid';return 'dot-idle';}
+function showTab(t){document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',['roadmap','kanban'][i]===t));document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('v-'+t).classList.add('active');if(t==='kanban')renderKanban();}
+function toggleForm(){const f=document.getElementById('add-form');f.style.display=f.style.display==='none'?'block':'none';if(f.style.display==='block')document.getElementById('f-nombre').focus();}
+function saveProject(){const nombre=document.getElementById('f-nombre').value.trim();if(!nombre)return;const er=document.getElementById('f-etapas').value.trim();const etapas=er?er.split('\n').filter(e=>e.trim()).map(e=>({n:e.trim(),p:0})):[{n:'En progreso',p:0}];P.push({id:Date.now(),nombre,area:document.getElementById('f-area').value,estado:document.getElementById('f-estado').value,objetivo:document.getElementById('f-obj').value.trim(),bloqueo:document.getElementById('f-bloqueo').value.trim(),etapas});save(P);['f-nombre','f-obj','f-bloqueo','f-etapas'].forEach(id=>document.getElementById(id).value='');toggleForm();render();toast('Proyecto agregado');}
+function del(id){if(!confirm('¿Eliminar?'))return;P=P.filter(p=>p.id!==id);save(P);render();}
+function updateEtapa(pid,idx,val){const p=P.find(x=>x.id===pid);if(!p)return;p.etapas[idx].p=Math.min(100,Math.max(0,parseInt(val)||0));if(avg(p)===100)p.estado='Completado';save(P);render();toast('Guardado');}
+function cycleEstado(pid){const p=P.find(x=>x.id===pid);if(!p)return;const s=['En curso','En pausa','Bloqueado','Completado'];p.estado=s[(s.indexOf(p.estado)+1)%s.length];save(P);render();}
+function renderSummary(){const curso=P.filter(p=>p.estado==='En curso').length,comp=P.filter(p=>p.estado==='Completado').length,bloq=P.filter(p=>p.estado==='Bloqueado'||p.bloqueo).length,a=P.length?Math.round(P.reduce((s,p)=>s+avg(p),0)/P.length):0;document.getElementById('s-total').textContent=P.length;document.getElementById('s-curso').textContent=curso;document.getElementById('s-comp').textContent=comp;document.getElementById('s-bloq').textContent=bloq;document.getElementById('s-avg').textContent=a+'%';const bloqueados=P.filter(p=>p.estado==='Bloqueado'||p.bloqueo),banner=document.getElementById('blocker-banner');if(bloqueados.length){banner.style.display='flex';const causas=[...new Set(bloqueados.map(p=>p.bloqueo).filter(Boolean))];document.getElementById('blocker-text').innerHTML=`<strong>${bloqueados.length} proyecto${bloqueados.length>1?'s':''} con bloqueo externo.</strong> Causa principal: ${causas.slice(0,2).join(' · ')}. Estos proyectos no pueden avanzar sin acción de terceros.`;}else banner.style.display='none';}
+function renderRoadmap(){const el=document.getElementById('roadmap-list');if(!P.length){el.innerHTML='<div class="empty">Agrega el primer proyecto.</div>';return;}el.innerHTML=P.map((p,i)=>{const a=avg(p),am=AM[p.area]||AM.gest,bcolor=bc(p.estado,a),ecls='estado-pill pill e-'+p.estado.replace(/ /g,'_');const etapasHtml=p.etapas.map((e,idx)=>{const dclass=dc(e.p,p.estado),icon=e.p===100?'✓':e.p>0?'◑':'○';return `<div class="etapa-node"><div class="etapa-dot ${dclass}">${icon}</div><div class="etapa-name">${e.n}</div><input type="number" class="etapa-input" min="0" max="100" value="${e.p}" onchange="updateEtapa(${p.id},${idx},this.value)" onclick="event.stopPropagation()" title="Actualizar %"></div>`;}).join('');return `<div class="proj-card" data-estado="${p.estado}" style="animation-delay:${i*.04}s"><div class="proj-top"><div class="proj-info"><div class="proj-name">${p.nombre}</div><div class="proj-meta"><span class="pill ${am.cls}">${am.label}</span><span class="${ecls}" onclick="cycleEstado(${p.id})" title="Cambiar estado">${p.estado}</span></div></div><div class="proj-right"><div class="proj-pct ${pc(a)}">${a}%</div><button class="btn btn-ghost btn-xs" onclick="del(${p.id})">eliminar</button></div></div><div class="prog-wrap"><div class="prog-bg"><div class="prog-fill" style="width:${a}%;background:${bcolor}"></div></div></div>${p.objetivo?`<div class="proj-obj">${p.objetivo}</div>`:''}${p.bloqueo?`<div class="blocker-row">⛓ Bloqueado por: ${p.bloqueo}</div>`:''}<div class="etapas-wrap"><div class="etapas-label">Fases del proyecto</div><div class="roadmap">${etapasHtml}</div></div></div>`;}).join('');}
+function renderKanban(){const groups={'En curso':P.filter(p=>p.estado==='En curso'),'En pausa':P.filter(p=>p.estado==='En pausa'),'Bloqueado':P.filter(p=>p.estado==='Bloqueado'),'Completado':P.filter(p=>p.estado==='Completado')};document.getElementById('kanban-board').innerHTML=Object.entries(groups).map(([estado,ps])=>{const col=EC[estado]||'#A09890';const cards=ps.map(p=>{const a=avg(p),am=AM[p.area]||AM.gest,bcolor=bc(p.estado,a);return `<div class="k-card"><div class="k-name">${p.nombre}</div><div class="k-area">${am.label}</div>${p.bloqueo?`<div style="font-size:10px;color:#D94F4F;font-family:var(--mono);margin-bottom:6px">⛓ ${p.bloqueo}</div>`:''}<div class="k-bar"><div class="k-fill" style="width:${a}%;background:${bcolor}"></div></div><div class="k-pct">${a}% · ${p.etapas.filter(e=>e.p===100).length}/${p.etapas.length} etapas</div></div>`;}).join('')||`<div class="k-empty">Sin proyectos</div>`;return `<div class="k-col"><div class="k-col-title"><div class="k-dot" style="background:${col}"></div>${estado} <span style="color:var(--text3);font-weight:400">(${ps.length})</span></div>${cards}</div>`;}).join('');}
+function render(){renderSummary();renderRoadmap();if(document.getElementById('v-kanban').classList.contains('active'))renderKanban();}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+document.getElementById('header-sub').textContent='Natalia Castaño Hoyos · '+new Date().toLocaleDateString('es-CO',{month:'long',year:'numeric'});
+render();
+</script>
+</body>
+</html>
